@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Congratulations!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      font-family: 'Raleway', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 60px;
+      font-family: 'Pacifico', cursive;
+      color: #120000;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+      animation: pop 0.6s ease-out;
+    }
+
+    p {
+      font-size: 24px;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #ffffff;
+      color: #f76c6c;
+      border: none;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0.2);
+        opacity: 0;
+      }
+      80% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Confetti effect using emoji particles */
+    .confetti {
+      position: absolute;
+      font-size: 30px;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -50px;
+        opacity: 1;
+      }
+      100% {
+        top: 100vh;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="winMessage">🎉 Player Wins! 🎉</h1>
+  <p>Congratulations! You played a great game.</p>
+  <button class="btn" onclick="window.location.href='index.html'">Play Again</button>
+
+  <!-- Confetti emojis -->
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const player = urlParams.get('player');
+    document.getElementById('winMessage').textContent = `🎉 Player ${player} Wins! 🎉`;
+
+    // Confetti
+    const emojis = ['🎊','🎉','✨','💥','🎈','🥳'];
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      confetti.style.left = `${Math.random() * 100}vw`;
+      confetti.style.animationDelay = `${Math.random() * 3}s`;
+      document.body.appendChild(confetti);
+    }
+  </script>
+
+</body>
+</html>
